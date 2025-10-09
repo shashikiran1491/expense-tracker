@@ -1,13 +1,13 @@
-package com.java.expensetracker;
+package com.java.expense;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ExpenseTrackerApplicationTests {
+class ExpenseTrackerApplicationTest {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
