@@ -1,1 +1,5 @@
 rootProject.name = 'expense-tracker'
+
+include 'expense-tracker-service'
+include 'expense-tracker-client'
+include 'expense-tracker-commons'
