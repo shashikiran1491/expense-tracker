@@ -1,6 +1,7 @@
 package com.java.expense.service;
 
 import com.java.expense.entity.User;
+import com.java.expense.exception.UserLoginException;
 import com.java.expense.exception.UserRegistrationException;
 import com.java.expense.model.LoginRequest;
 import com.java.expense.model.LoginResponse;
@@ -51,7 +52,7 @@ public class AuthService {
                             loginRequest.getPassword()));
 
         } catch (AuthenticationException e) {
-            throw new UserRegistrationException("Invalid email or password");
+            throw new UserLoginException("Invalid email or password");
         }
         String token = jwtUtils.generateToken(loginRequest.getEmail());
         return LoginResponse.builder().token(token).build();
