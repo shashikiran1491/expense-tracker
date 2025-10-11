@@ -1,6 +1,8 @@
 package com.java.expense.controller;
 
-import com.java.expense.model.UserRequest;
+import com.java.expense.model.LoginRequest;
+import com.java.expense.model.LoginResponse;
+import com.java.expense.model.RegistrationRequest;
 import com.java.expense.resource.AuthResource;
 import com.java.expense.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -14,8 +16,14 @@ public class AuthController implements AuthResource {
     private final AuthService authService;
 
     @Override
-    public ResponseEntity<String> register(UserRequest userRequest) {
-        authService.register(userRequest);
+    public ResponseEntity<String> register(RegistrationRequest registrationRequest) {
+        authService.register(registrationRequest);
         return ResponseEntity.ok("User Registered successfully");
+    }
+
+    @Override
+    public ResponseEntity<LoginResponse> login(LoginRequest LoginRequest) {
+        LoginResponse loginResponse = authService.login(LoginRequest);
+        return ResponseEntity.ok(loginResponse);
     }
 }
