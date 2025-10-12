@@ -1,8 +1,8 @@
 package com.java.expense.controller;
 
-import com.java.expense.model.LoginRequest;
-import com.java.expense.model.LoginResponse;
-import com.java.expense.model.RegistrationRequest;
+import com.java.expense.model.auth.LoginRequest;
+import com.java.expense.model.auth.LoginResponse;
+import com.java.expense.model.auth.RegistrationRequest;
 import com.java.expense.resource.AuthResource;
 import com.java.expense.service.AuthService;
 import lombok.AllArgsConstructor;
