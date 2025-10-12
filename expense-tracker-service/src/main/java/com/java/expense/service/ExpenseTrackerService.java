@@ -3,9 +3,11 @@ package com.java.expense.service;
 import com.java.expense.builder.ExpenseBuilder;
 import com.java.expense.entity.Expense;
 import com.java.expense.entity.User;
+import com.java.expense.exception.ExpenseNotFoundException;
 import com.java.expense.exception.UserNotFoundException;
 import com.java.expense.model.expense.ExpenseParams;
 import com.java.expense.model.expense.ExpenseRequest;
+import com.java.expense.model.expense.ExpenseListResponse;
 import com.java.expense.model.expense.ExpenseResponse;
 import com.java.expense.repository.AuthRepository;
 import com.java.expense.repository.ExpenseRepository;
@@ -48,7 +50,7 @@ public class ExpenseTrackerService {
         expenseRepository.save(expense);
     }
 
-    public ExpenseResponse getExpenses(String email, ExpenseParams expenseParams) {
+    public ExpenseListResponse getExpenses(String email, ExpenseParams expenseParams) {
         log.info("Printing expense params : {}", expenseParams);
         Page<Expense> expensePage;
         setEndDate(expenseParams);
@@ -67,12 +69,29 @@ public class ExpenseTrackerService {
             expensePage = expenseRepository.findByUserAndExpenseDateBetween(user, startDate, endDate, pageable);
         }
 
-        List<com.java.expense.model.expense.Expense> expenseList = expensePage.getContent()
+        List<com.java.expense.model.expense.ExpenseResponse> expenseList = expensePage.getContent()
                 .stream()
                 .map(ExpenseBuilder::buildExpense)
                 .toList();
 
         return buildExpenseResponse(expenseList, expensePage);
+    }
+
+
+    public ExpenseResponse editExpense(Long id, String email, ExpenseRequest expenseRequest) {
+        User user = getUser(email);
+
+        Expense existingExpense = expenseRepository.findExpenseByUserAndId(user, id)
+                .orElseThrow(() -> new ExpenseNotFoundException("Expense not found. expenseId: " + id));
+
+        existingExpense.setAmount(expenseRequest.getAmount());
+        existingExpense.setExpenseType(expenseRequest.getExpenseType());
+        existingExpense.setExpenseDate(expenseRequest.getExpenseDate());
+        existingExpense.setCategory(expenseRequest.getCategory());
+        existingExpense.setDescription(expenseRequest.getDescription());
+
+        Expense expense = expenseRepository.save(existingExpense);
+        return ExpenseBuilder.buildExpense(expense);
     }
 
     private static void setEndDate(ExpenseParams expenseParams) {

@@ -1,17 +1,21 @@
 package com.java.expense.model.expense;
 
-import lombok.*;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+import java.time.LocalDateTime;
+
+@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ExpenseResponse {
-    private List<Expense> expenses;
-    private int page;
-    private int pageSize;
-    private long totalElements;
-    private int totalPages;
+    private long id;
+    private Double amount;
+    private String expenseType;
+    private LocalDateTime expenseDate;
+    private String category;
+    private String description;
 }

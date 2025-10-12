@@ -2,6 +2,7 @@ package com.java.expense.controller;
 
 import com.java.expense.model.expense.ExpenseParams;
 import com.java.expense.model.expense.ExpenseRequest;
+import com.java.expense.model.expense.ExpenseListResponse;
 import com.java.expense.model.expense.ExpenseResponse;
 import com.java.expense.resource.ExpenseTrackerResource;
 import com.java.expense.service.ExpenseTrackerService;
@@ -9,8 +10,6 @@ import com.java.expense.utils.JwtUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
 
 @RestController
 @AllArgsConstructor
@@ -27,15 +26,17 @@ public class ExpenseTrackerController implements ExpenseTrackerResource {
     }
 
     @Override
-    public ResponseEntity<ExpenseResponse> getExpenses(String authHeader, ExpenseParams expenseParams) {
+    public ResponseEntity<ExpenseListResponse> getExpenses(String authHeader, ExpenseParams expenseParams) {
         String email = extractEmailFromToken(authHeader);
-        ExpenseResponse expenseResponse = expenseTrackerService.getExpenses(email, expenseParams);
-        return ResponseEntity.ok(expenseResponse);
+        ExpenseListResponse expenseListResponse = expenseTrackerService.getExpenses(email, expenseParams);
+        return ResponseEntity.ok(expenseListResponse);
     }
 
     @Override
-    public ResponseEntity<Void> editExpense(String authHeader, ExpenseParams expenseParams) {
-        return null;
+    public ResponseEntity<ExpenseResponse> editExpense(String authHeader, Long id, ExpenseRequest expenseRequest) {
+        String email = extractEmailFromToken(authHeader);
+        ExpenseResponse expenseResponse = expenseTrackerService.editExpense(id, email, expenseRequest);
+        return ResponseEntity.ok(expenseResponse);
     }
 
     private String extractEmailFromToken(String authHeader) {
