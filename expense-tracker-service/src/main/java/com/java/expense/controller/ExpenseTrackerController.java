@@ -39,6 +39,13 @@ public class ExpenseTrackerController implements ExpenseTrackerResource {
         return ResponseEntity.ok(expenseResponse);
     }
 
+    @Override
+    public ResponseEntity<Void> deleteExpense(String authHeader, Long id) {
+        String email = extractEmailFromToken(authHeader);
+        expenseTrackerService.deleteExpense(email, id);
+        return ResponseEntity.noContent().build();
+    }
+
     private String extractEmailFromToken(String authHeader) {
         String token = authHeader.substring(7);
         return jwtUtils.getUsernameFromToken(token);

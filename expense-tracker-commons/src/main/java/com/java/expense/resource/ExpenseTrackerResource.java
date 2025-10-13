@@ -24,4 +24,10 @@ public interface ExpenseTrackerResource {
                                                 @PathVariable Long id,
                                                 @RequestBody @Valid ExpenseRequest ExpenseRequest);
 
+
+    @DeleteMapping("/api/expense-tracker/v1/expenses/{id}")
+    ResponseEntity<Void> deleteExpense(@RequestHeader("Authorization") String authHeader,
+                                                @PathVariable Long id);
+
+
 }

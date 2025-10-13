@@ -94,6 +94,15 @@ public class ExpenseTrackerService {
         return ExpenseBuilder.buildExpense(expense);
     }
 
+    public void deleteExpense(String email, Long id) {
+        User user = getUser(email);
+
+       Expense existingExpense = expenseRepository.findExpenseByUserAndId(user, id)
+                .orElseThrow(() -> new ExpenseNotFoundException("Expense not found. expenseId: " + id));
+
+       expenseRepository.delete(existingExpense);
+    }
+
     private static void setEndDate(ExpenseParams expenseParams) {
         if(expenseParams.getEndDate() == null) {
             expenseParams.setEndDate(LocalDateTime.now().toLocalDate());
