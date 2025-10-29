@@ -1,9 +1,6 @@
 package com.java.expense.exception.controlleradvisor;
 
-import com.java.expense.exception.StandardError;
-import com.java.expense.exception.UserLoginException;
-import com.java.expense.exception.UserNotFoundException;
-import com.java.expense.exception.UserRegistrationException;
+import com.java.expense.exception.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -38,7 +35,8 @@ public class ControllerAdvisor {
 
     @ExceptionHandler({UserRegistrationException.class,
             UserLoginException.class,
-            UserNotFoundException.class})
+            UserNotFoundException.class,
+            ExpenseNotFoundException.class})
     public ResponseEntity<StandardError> handleUserExceptions(RuntimeException ex) {
         StandardError error = StandardError.builder()
                 .status(BAD_REQUEST.name())
