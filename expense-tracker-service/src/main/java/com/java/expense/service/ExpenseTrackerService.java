@@ -78,7 +78,6 @@ public class ExpenseTrackerService {
         return buildExpenseResponse(expenseList, expensePage);
     }
 
-
     public ExpenseResponse editExpense(Long id, String email, ExpenseRequest expenseRequest) {
         User user = userService.getUser(email);
 

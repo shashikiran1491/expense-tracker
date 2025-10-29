@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
-
 public interface ExpenseTrackerResource {
 
     @PostMapping("/api/expense-tracker/v1/expenses")
@@ -36,6 +35,5 @@ public interface ExpenseTrackerResource {
     @DeleteMapping("/api/expense-tracker/v1/expenses/{id}")
     ResponseEntity<Void> deleteExpense(@RequestHeader("Authorization") String authHeader,
                                                 @PathVariable Long id);
-
 
 }
