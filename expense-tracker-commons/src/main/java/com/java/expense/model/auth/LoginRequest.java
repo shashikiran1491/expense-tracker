@@ -1,4 +1,4 @@
-package com.java.expense.model;
+package com.java.expense.model.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

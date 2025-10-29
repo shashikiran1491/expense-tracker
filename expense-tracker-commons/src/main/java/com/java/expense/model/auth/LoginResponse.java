@@ -1,4 +1,4 @@
-package com.java.expense.model;
+package com.java.expense.model.auth;
 
 import lombok.Builder;
 import lombok.Data;
