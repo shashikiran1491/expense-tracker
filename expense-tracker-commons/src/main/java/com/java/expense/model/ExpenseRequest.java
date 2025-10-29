@@ -1,4 +1,4 @@
-package com.java.expense.model.expense;
+package com.java.expense.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
@@ -17,11 +17,14 @@ public class ExpenseRequest {
     @Positive(message = "Amount must be greater than zero")
     private Double amount;
 
+    private String paidTo;
+
     @NotBlank(message = "Expense type is required")
-    @Pattern(regexp = "INCOME|EXPENSE", message = "Expense type must be INCOME or EXPENSE")
+    @Pattern(regexp = "Income|Expense", message = "Expense type must be Income or Expense")
     private String expenseType;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    //TODO : Change this because LocalDateTIme should not have zone details. Use OffsetDateTime or ZonedDateTime if zone info is needed.
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
     private LocalDateTime expenseDate;
 
     @NotBlank(message = "Category is required")

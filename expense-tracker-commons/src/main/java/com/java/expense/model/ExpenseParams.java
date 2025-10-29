@@ -1,4 +1,4 @@
-package com.java.expense.model.expense;
+package com.java.expense.model;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

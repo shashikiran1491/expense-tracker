@@ -22,6 +22,8 @@ public class Expense {
 
     private String expenseType;
 
+    private String paidTo;
+
     private LocalDateTime expenseDate;
 
     private String category;
