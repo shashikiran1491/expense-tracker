@@ -38,7 +38,8 @@ public class SecurityConfig {
                 // Configure endpoint access rules
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/expense-tracker/v1/auth/register",
-                                         "/api/expense-tracker/v1/auth/login")
+                                         "/api/expense-tracker/v1/auth/login",
+                                "/api/expense-tracker/v1/auth/login/google")
                         .permitAll()
                         .anyRequest().authenticated()
                 )
