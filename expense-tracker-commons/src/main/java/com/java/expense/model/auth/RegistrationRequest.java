@@ -16,8 +16,8 @@ public class RegistrationRequest {
     @NotBlank(message = "Password cannot be blank")
     @Size(min = 8, max = 64, message = "Password must be between 8 and 64 characters")
     @Pattern(
-            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,64}$",
-            message = "Password must contain uppercase, lowercase, number, and special character"
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,64}$",
+            message = "Password must contain uppercase, lowercase, number"
     )
     private String password;
 }
