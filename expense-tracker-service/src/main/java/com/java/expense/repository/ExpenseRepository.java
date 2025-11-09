@@ -33,7 +33,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long>, JpaSpec
 
     @Query("SELECT new com.java.expense.model.CategorySummary(e.category, SUM(e.amount)) " +
             "FROM Expense e " +
-            "WHERE e.user = :user AND e.expenseDate BETWEEN :startDate AND :endDate " +
+            "WHERE e.user = :user AND e.expenseType = 'Expense'" +
+            "AND e.expenseDate BETWEEN :startDate AND :endDate " +
             "GROUP BY e.category")
     List<CategorySummary> findCategoryWiseSummary(@Param("user") User user,
                                                   @Param("startDate") LocalDateTime startDate,
