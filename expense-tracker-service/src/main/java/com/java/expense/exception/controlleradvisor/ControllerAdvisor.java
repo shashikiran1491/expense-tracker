@@ -36,7 +36,9 @@ public class ControllerAdvisor {
     @ExceptionHandler({UserRegistrationException.class,
             UserLoginException.class,
             UserNotFoundException.class,
-            ExpenseNotFoundException.class})
+            ExpenseNotFoundException.class,
+            InvalidMonthException.class,
+            InvalidYearException.class})
     public ResponseEntity<StandardError> handleUserExceptions(RuntimeException ex) {
         StandardError error = StandardError.builder()
                 .status(BAD_REQUEST.name())
