@@ -18,10 +18,6 @@ import java.util.Optional;
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long>, JpaSpecificationExecutor<Expense> {
 
-    Page<Expense> findByUserAndExpenseDateBetween(User user, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
-
-    Page<Expense> findByUserAndCategoryAndExpenseDateBetween(User user, String category, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
-
     Optional<Expense> findExpenseByUserAndId(User user, Long id);
 
     @Query("SELECT COALESCE(SUM(e.amount), 0) FROM Expense e WHERE e.user = :user AND e.expenseType = :type AND e.expenseDate BETWEEN :startDate AND :endDate")
