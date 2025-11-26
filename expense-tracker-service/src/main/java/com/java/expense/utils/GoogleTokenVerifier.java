@@ -13,6 +13,7 @@ import java.util.Collections;
 public class GoogleTokenVerifier {
 
     public static IdToken.Payload verifyToken(GoogleLoginRequest loginRequest) {
+        //TODO: Store audience in property file
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
                 .setAudience(Collections.singletonList("1048959448643-daek0gru58fma69mvf0mqej3c140o8ui.apps.googleusercontent.com"))
                 .build();
