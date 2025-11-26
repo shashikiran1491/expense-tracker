@@ -15,5 +15,4 @@ public class UserService {
     public User getUser(String email) {
         return authRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User not found. userId: " + email));
     }
-
 }

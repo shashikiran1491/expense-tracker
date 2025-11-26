@@ -30,6 +30,7 @@ public class AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
+    private final UserService userService;
 
     public RegisterResponse register(RegistrationRequest registrationRequest) {
         boolean userExists = authRepository.existsByEmail(registrationRequest.getEmail());
@@ -103,5 +104,18 @@ public class AuthService {
 
         String token = jwtUtils.generateToken(email);
         return GoogleLoginResponse.builder().token(token).build();
+    }
+
+    public UserDetailsResponse getCurrentUser( ) {
+        String email = jwtUtils.getCurrentUser();
+        User user = userService.getUser(email);
+
+        return UserDetailsResponse.builder()
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .pictureUrl(user.getPictureUrl())
+                .lastLogin(user.getLastLogin())
+                .build();
     }
 }
